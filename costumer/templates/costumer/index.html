@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Table Costumer</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'costumer/table.css' %}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h1><span class="blue">&lt;</span>Table<span class="blue">&gt;</span> <span class="yellow">Costumer</pan></h1>
+
+<table class="container">
+	<thead>
+		<tr>
+			<th><h1>Costumer Name</h1></th>
+			<th><h1>Address</h1></th>
+			<th><h1>Phone Number</h1></th>
+			<th><h1>Email</h1></th>
+			<th><h1>Action</h1></th>
+		</tr>
+	</thead>
+	<tbody>
+        {% for costumer in all_costumers %}
+        <tr>
+            <td>
+                <a href="{% url 'costumer:detail' costumer.id %}">{{ costumer.name }}</a>
+            </td>
+            <td>
+                {{ costumer.address }}
+            </td>
+            <td>
+                {{ costumer.phone_number }}
+            </td>
+            <td>
+                {{ costumer.email }}
+            </td>
+            <td>
+                <a class="btn btn-default" href="{% url 'costumer:costumer-update' costumer.id %}">Update</a>
+                <form action="{% url 'costumer:costumer-delete' costumer.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+	</tbody>
+</table>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-default"><a href="{% url 'costumer:costumer-add' %}">Add a New Costumer</a></button>
+        </div>
+    </div>
+</div>
+<!-- partial -->
+  
+</body>
+</html>
