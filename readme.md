@@ -69,7 +69,7 @@ Ensure you have cloned/pulled the repository to your local. Open terminal in the
         http://127.0.0.1:8000/admin/
         ```
 ## Documentation
-Use these urls below to access each section in the application
+Use these urls below to access each section in the application:
     1. Accessing Book List:
     ```
         http://127.0.0.1:8000/book/
@@ -80,7 +80,7 @@ Use these urls below to access each section in the application
     ```
     3. Accessing Transactionr List:
     ```
-        http://127.0.0.1:8000/transactionr/
+        http://127.0.0.1:8000/transaction/
     ```
 
 See more details on ``urls.py`` in each application folder in this app.
