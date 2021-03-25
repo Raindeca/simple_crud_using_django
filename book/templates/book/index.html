@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Table Book</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'costumer/table.css' %}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h1><span class="blue">&lt;</span>Book<span class="blue">&gt;</span> <span class="yellow">List</pan></h1>
+
+<table class="container">
+	<thead>
+		<tr>
+			<th><h1>Book Title</h1></th>
+			<th><h1>Type</h1></th>
+			<th><h1>Category</h1></th>
+			<th><h1>Price</h1></th>
+			<th><h1>Action</h1></th>
+		</tr>
+	</thead>
+	<tbody>
+        {% for book in all_books %}
+        <tr>
+            <td>
+                <a href="{% url 'book:detail' book.id %}">{{ book.book_title }}</a>
+            </td>
+            <td>
+                {{ book.book_type }}
+            </td>
+            <td>
+                {{ book.category }}
+            </td>
+            <td>
+                {{ book.price }}
+            </td>
+            <td>
+                <a class="btn btn-default" href="{% url 'book:book-update' book.id %}">Update</a>
+                <form action="{% url 'book:book-delete' book.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+	</tbody>
+</table>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-default"><a href="{% url 'book:book-add' %}">Add a New book</a></button>
+        </div>
+    </div>
+</div>
+<!-- partial -->
+  
+</body>
+</html>
