@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - &lt;Table&gt; Responsive</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'transaction/table.css' %}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h1><span class="blue">&lt;</span>Table<span class="blue">&gt;</span> <span class="yellow">Transaction</pan></h1>
+
+<table class="container">
+	<thead>
+		<tr>
+			<th><h1>Costumer Name</h1></th>
+			<th><h1>Purchased Book</h1></th>
+			<th><h1>Payment Method</h1></th>
+			<th><h1>Total Price</h1></th>
+			<th><h1>Action</h1></th>
+		</tr>
+	</thead>
+	<tbody>
+        {% for order in all_transactions %}
+        <tr>
+            <td>
+                {{ order.costumer.name }}
+            </td>
+            <td>
+                {{ order.book.book_title }}
+            </td>
+            <td>
+                {{ order.payment.payment_method }}
+            </td>
+            <td>
+                {{ order.total_price }}
+            </td>
+            <td>
+                <a class="btn btn-default" href="{% url 'transaction:transaction-update' order.id %}">Update</a>
+                <form action="{% url 'transaction:transaction-delete' order.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+	</tbody>
+</table>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-default"><a href="{% url 'transaction:transaction-add' %}">Buy Book</a></button>
+        </div>
+    </div>
+</div>
+<!-- partial -->
+  
+</body>
+</html>
